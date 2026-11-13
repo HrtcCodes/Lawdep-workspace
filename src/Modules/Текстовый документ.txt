@@ -1,0 +1,38 @@
+using System;
+using System.Collections.Generic;
+
+namespace WorkSpace.Modules.Team
+{
+    public static class Roles
+    {
+        public const string Admin = "Администратор";
+        public const string Editor = "Редактор";
+        public const string Viewer = "Наблюдатель";
+    }
+
+    public class TeamMember
+    {
+        public string Login { get; set; }      // Доменный/Windows логин (Environment.UserName)
+        public string FullName { get; set; }   // ФИО или должность для удобства
+        public string Role { get; set; }       // Администратор / Редактор / Наблюдатель
+        public string AddedAt { get; set; }
+
+        public TeamMember()
+        {
+            Role = Roles.Editor;
+            AddedAt = DateTime.Now.ToString("dd.MM.yyyy");
+        }
+    }
+
+    public class TeamDatabase
+    {
+        public bool AllowUnknownUsersReadOnly { get; set; }
+        public List<TeamMember> Members { get; set; }
+
+        public TeamDatabase()
+        {
+            AllowUnknownUsersReadOnly = true;
+            Members = new List<TeamMember>();
+        }
+    }
+}
